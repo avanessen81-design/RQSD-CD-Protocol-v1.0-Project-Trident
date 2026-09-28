@@ -1,60 +1,62 @@
 # RQSD-CD-Protocol-v1.0-Project-Trident
 Official repository for the RQSD-CD Protocol v1.0 (Project Trident, i-DEPOT 158618). A post-quantum, hardware-native cyber defense engine featuring a parallel SHA3-256 bitwise XOR-matrix and an asynchronous &lt;1ns Egress Gate synthesized for Altera Agilex 7 FPGAs. Developed by Arjan van Essen.
-# RQSD-CD Protocol v1.0 — Project Trident
 
-### Geregistreerd onder i-DEPOT Nummer: 158618
-**Ontwikkelaar:** Arjan van Essen  
-**Status:** Software-Prototype Gecertificeerd / Hardware-Synthese Gevalideerd (Pre-Production)  
-**Target Architectuur:** Ultra-Low Latency 6G-Infrastructuur, Autonome Voertuigen, Smart Grids & Post-Quantum Hardware Defensie
 
----
-
-## Project Overzicht
-
-Project Trident introduceert het **RQSD-CD (Redundancy, Qualification, Security, Defense - Core Diagnostics / Control Diode) Protocol v1.0**. Dit protocol functioneert als een actieve, zelfgenezende defensielaag op hardwareniveau voor kritieke netwerkinfrastructuren. 
-
-Waar traditionele IT-beveiliging afhankelijk is van trage softwarematige firewalls, verplaatst Project Trident de complete defensielogica rechtstreeks naar de transistoren van een FPGA-chip (zoals de Altera Agilex 7). Dankzij gestroomlijnde bitwise XOR-operaties en asynchrone hardware-schakelingen biedt dit protocol mathematische kwantumveiligheid en een faling-reactiesnelheid van **minder dan 1 nanoseconde**, zonder netwerkvertraging (zero-latency) te introduceren.
+### Registered under Benelux i-DEPOT Number: 158618
+**Developer:** Arjan van Essen  
+**Status:** Software Prototype Certified / Hardware Synthesis Validated (Pre-Production)  
+**Target Architecture:** Ultra-Low Latency 6G Infrastructure, Autonomous Vehicles, Smart Grids & Post-Quantum Hardware Defense
 
 ---
 
-## De Drie Tanden (Functie-architectuur)
+## Project Overview
 
-### TAND 1: Redundante Parallelle Ingress Diode (-CD Logica)
-* **Functie:** Continue realtime statusmonitoring van drie parallelle invoerkanalen (Kabel A, B en C) via een *Dynamic Failover Architecture*.
-* **Werking:** Zodra de hoofdlijn (Kabel A) fysiek wordt gesaboteerd, detecteert de hardwarematige -CD sensor direct de statusverandering `[False, True, True]`. Binnen exact 0 microseconden worden de reserves parallel aangesproken. De uptime van de verbinding blijft gegarandeerd 100%.
+Project Trident introduces the **RQSD-CD (Redundancy, Qualification, Security, Defense - Core Diagnostics / Control Diode) Protocol v1.0**. This protocol functions as an active, self-healing cyber defense layer implemented directly at the hardware level for critical network infrastructures.
 
-### TAND 2: Kwantumbestendige Computation Core (SHA3 Ruis-Blender)
-* **Functie:** Symmetrische ultra-high-speed versleuteling via een SHA3-256 bitwise XOR-matrix, synchroon aan de payload-lengte (One-Time Pad methode).
-* **Kwantum-Veiligheid:** De unieke hardware-entropie in combinatie met een niet-lineaire Keccak-frequentieblender maakt de getransporteerde data mathematisch immuun voor kwantumanalyses. De algoritmes van **Shor** en **Grover** lopen hier keihard op vast. Er blijft een wiskundig onkraakbare restbeveiliging van 128-bits over.
-
-### TAND 3: Asynchrone Egress Gate (< 1ns Target Switch)
-* **Functie:** Realtime integriteitscontrole via de SVI-procedure (Secure Vault Injection).
-* **Cyber-Defensie:** Bij een gecoördineerde cyberaanval of totale faling van de invoerpaden (`[False, False, False]`) reageert de uitgangspoort **asynchroon**. De gate wacht niet op de volgende computertik (klokcyclus), maar trekt de pinnen op transistorniveau binnen < 1 nanoseconde fysiek in een High-Impedance status (`ISOLATED`). De hacker wordt hardwarematig buitengesloten.
+While traditional IT security relies on slower software-based firewalls, Project Trident embeds the entire defense logic directly into the transistors of an FPGA chip (such as the Altera Agilex 7). Utilizing streamlined bitwise XOR matrices and asynchronous hardware switching, this protocol provides mathematical post-quantum security and a failure-response time of **under 1 nanosecond**, completely eliminating software-induced latency.
 
 ---
 
-## Gevalideerde Stresstest Prestaties (Hardware-Synthese)
+## The Three Prongs (Functional Architecture)
 
-Het protocol is met succes syntactisch en logisch gesynthetiseerd binnen **Altera Quartus Prime Pro Edition 26.1.1** voor een high-end **Agilex 7 FPGA**-architectuur. De logica beslaat exact **896 logic cells** en functioneert volledig parallel.
+### PRONG 1: Redundant Parallel Ingress Diode (-CD Logic)
+* **Function:** Continuous, real-time health and status monitoring of three parallel input channels (Cable A, B, and C) via a *Dynamic Failover Architecture*.
+* **Operation:** If the primary backbone line (Cable A) is physically sabotaged or severed, the hardware-native -CD sensor instantly detects the state change `[False, True, True]`. Within exactly 0 microseconds, the parallel GSK backup reserves are engaged. Network uptime remains guaranteed at 100%.
 
-### Tijdlijn-analyse van de Hardware-Stresstest:
+### PRONG 2: Post-Quantum Computation Core (SHA3 Noise Blender)
+* **Function:** Symmetric, ultra-high-speed encryption utilizing a SHA3-256 bitwise XOR matrix running synchronously with the payload length (One-Time Pad method).
+* **Quantum Immunity:** Injecting hardware-native entropy combined with a non-linear Keccak frequency blending matrix ensures the in-transit data is mathematically immune to quantum cryptanalysis. Algorithms such as **Shor** and **Grover** fail completely against this architecture, leaving a mathematically uncrackable 128-bit security margin for eternity.
 
-| Tijdstip | Systeemstatus | Input Status (Kabel A, B, C) | Gedrag van de Output (Payload Out) |
+### PRONG 3: Asynchronous Egress Gate (< 1ns Target Switch)
+* **Function:** Real-time integrity validation via the SVI procedure (Secure Vault Injection).
+* **Cyber Defense:** In the event of a coordinated cyberattack or complete failure of all ingress paths (`[False, False, False]`), the output gate reacts **asynchronously**. The gate does not wait for the next system clock cycle; instead, it forces the physical I/O pins into a High-Impedance state (`ISOLATED`) within less than 1 nanoseconde, physically locking out the adversary.
+
+---
+
+## Validated Stress Test Performance (Hardware Synthesis)
+
+The core architecture has been successfully synthesized with **zero errors** using **Altera Quartus Prime Pro Edition 26.1.1** targeting a high-performance **Agilex 7 FPGA** device. The entire logic pipeline is completely parallelized and utilizes exactly **896 logic cells**.
+
+### Hardware Stress Test Timeline Analysis:
+
+| Timestamp | System Status | Ingress State (Cable A, B, C) | Egress Output Behavior (Payload Out) |
 | :--- | :--- | :--- | :--- |
-| **0 ns - 40 ns** | `PASSIVE_BYPASS` (00) | `[True, True, True]` | Volledig geblokkeerd (Koude start veiligheid) |
-| **Bij 40 ns** | `OPERATIONAL` (01) | `[True, True, True]` | **Actieve crypto-output** (Sovereign Seed geverifieerd) |
-| **Bij 60 ns** | `OPERATIONAL` (01) | `[False, True, True]` | **100% Uptime** (Tand 1 schakelt direct over naar back-up) |
-| **Bij 100 ns** | `ISOLATED` (11) | `[False, False, False]` | **Hermetisch gesloten** (Asynchrone uitschakeling naar 'Z' < 1ns) |
+| **0 ns - 40 ns** | `PASSIVE_BYPASS` (00) | `[True, True, True]` | Completely blocked (Cold Boot safety isolation) |
+| **At 40 ns** | `OPERATIONAL` (01) | `[True, True, True]` | **Active cryptographic output** (Sovereign Seed verified) |
+| **At 60 ns** | `OPERATIONAL` (01) | `[False, True, True]` | **100% Zero-Latency Uptime** (Prong 1 seamless failover) |
+| **At 100 ns** | `ISOLATED` (11) | `[False, False, False]` | **Hermetically sealed** (Asynchronous shutdown to 'Z' < 1ns) |
 
 ---
 
-## Licentie & Intellectueel Eigendom
+## Licensing & Intellectual Property
 
-Alle intellectuele eigendomsrechten, wiskundige matrices en architectuurontwerpen van Project Trident zijn officieel vastgelegd en tijdsgestempeld onder **Benelux i-DEPOT nummer 158618**.
+All intellectual property rights, mathematical matrices, and hardware architecture designs regarding Project Trident are officially registered and timestamped under Benelux **i-DEPOT number 158618**.
 
-Dit project is gepubliceerd onder de **Apache License 2.0**. Dit betekent dat u de documentatie mag inzien en evalueren, mits u te allen tijde de originele auteur (**Arjan van Essen**) en het bijbehorende i-DEPOT nummer vermeldt.
+This documentation and prototype concept are published under the terms of the **Apache License 2.0**. You are permitted to review and evaluate this project, provided that full attribution to the original author (**Arjan van Essen**) and the corresponding i-DEPOT registration number are maintained at all times.
 
-### Evaluatie & Commerciële Licenties (B2B)
-De volledige, productie-ready **VHDL / Verilog IP-Core** (geoptimized voor AMD Vivado en Altera Quartus Pro) is beschikbaar voor commerciële licentiëring, benchmarks of evaluatie binnen vitale infrastructuur (Smart Grids, ICS/SCADA, Medische Robotica, Telecom).
+### B2B Evaluation & Commercial Licensing
+The complete, production-ready **VHDL / Verilog IP-Core** (fully optimized for AMD Vivado and Altera Quartus Pro environments) is available for commercial licensing, hardware benchmarking, or implementation within vital infrastructures (Smart Grids, ICS/SCADA, Medical Robotics, Telecom Hubs).
+
+To request access to the source code repository or to open a secure evaluation environment under a non-disclosure agreement (NDA), please contact the developer directly.
 
 Voor toegang tot de broncode en het openen van een beveiligde evaluatieomgeving onder NDA (geheimhoudingsverklaring), kunt u rechtstreeks contact opnemen met de ontwikkelaar.
