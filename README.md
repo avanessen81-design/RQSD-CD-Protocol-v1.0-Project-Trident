@@ -59,4 +59,4 @@ The complete, production-ready **VHDL / Verilog IP-Core** (fully optimized for A
 
 To request access to the source code repository or to open a secure evaluation environment under a non-disclosure agreement (NDA), please contact the developer directly.
 
-Voor toegang tot de broncode en het openen van een beveiligde evaluatieomgeving onder NDA (geheimhoudingsverklaring), kunt u rechtstreeks contact opnemen met de ontwikkelaar.
+
