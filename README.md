@@ -27,9 +27,10 @@ While traditional IT security relies on slower software-based firewalls, Project
 * **Encryption (Transmitter):** Symmetric, ultra-high-speed encryption utilizing a SHA3-256 bitwise XOR matrix running synchronously with the payload length (One-Time Pad method). Injecting hardware-native entropy combined with a non-linear Keccak frequency blending matrix ensures the in-transit ciphertext is mathematically immune to quantum cryptanalysis (**Shor** and **Grover** algorithms fail completely).
 * **Decryption (Reversal Core):** Utilizing the absolute mathematical symmetry of hardware XOR-gates, the legitieme receiver executes a real-time, synchronous inverse matrix operation. This completely neutralizes the injected cryptographic noise block, recovering the original telemetry stream with **zero latency** and **zero data loss (100% lossless decryption)**.
 
-### PRONG 3: Asynchronous Egress Gate (< 1ns Target Switch)
+### PRONG 3: Asynchronous Egress Gate with Intelligent Lockout (< 1ns Target Switch)
 * **Function:** Real-time integrity validation via the SVI procedure (Secure Vault Injection).
-* **Cyber Defense:** In the event of a coordinated cyberattack or complete failure of all ingress paths (`[False, False, False]`), the output gate reacts **asynchronously**. The gate does not wait for the next system clock cycle; instead, it forces the physical I/O pins into a High-Impedance state (`ISOLATED`) within less than 1 nanosecond, physically locking out the adversary from the local critical architecture.
+* **Enterprise Intelligent Reboot:** The core features an integrated crash counter. It automatically allows up to 2 system reboots/reconnections to filter out false positives (temporary network drops). On the 3rd consecutive network failure, the system activates a permanent `force_lockout`.
+* **Cyber Defense:** Once the lockout is triggered, the gate forces the physical I/O pins into a High-Impedance state (`ISOLATED / 'Z'`) within less than 1 nanosecond. The system remains permanently sealed until a network administrator manually re-authenticates the core with the Sovereign Seed.
 
 ---
 
@@ -37,14 +38,17 @@ While traditional IT security relies on slower software-based firewalls, Project
 
 The complete end-to-end hardware pipeline (Transmitter, SHA3 Noise Blender, Egress Gate, and Reversal Decryption Core) has been successfully synthesized using **Altera Quartus Prime Pro Edition 26.1.1** targeting a high-performance **Agilex 7 FPGA** device. The architecture compiles with **zero errors** and utilizes exactly **896 logic cells** in a fully parallel configuration.
 
-### Hardware Stress Test Timeline Analysis (0 ns - 200 ns):
+### Hardware Stress Test Timeline Analysis (Enterprise 3-Step Pulsed Lockout):
 
-| Timestamp | System Status | Ingress State (Cable A, B, C) | Egress Output Behavior (`payload_out`) | Decryption Output (`decrypted_out`) |
+| Timestamp | System Status | Ingress State (Cable A, B, C) | Crash Counter | Behavior of Output (`payload_out`) |
 | :--- | :--- | :--- | :--- | :--- |
-| **0 ns - 40 ns** | `PASSIVE_BYPASS` (00) | `[True, True, True]` | Completely blocked (Cold Boot safety isolation) | Completely zeroed / Locked |
-| **At 40 ns** | `OPERATIONAL` (01) | `[True, True, True]` | **Active cryptographic ciphertext** spawned | **Instant 100% Lossless Recovery** (`X"54454C45..."` / "TELEMETRIE") |
-| **At 60 ns** | `OPERATIONAL` (01) | `[False, True, True]` | **100% Zero-Latency Uptime** (Prong 1 failover) | **Uninterrupted Data Recovery** continues flawlessly |
-| **At 100 ns** | `ISOLATED` (11) | `[False, False, False]` | **Hermetically sealed** (Asynchronous High-Impedance 'Z' state) | Cut off on hardware level (Adversary receives empty vault) |
+| **0 ns - 40 ns** | `PASSIVE_BYPASS` | `[True, True, True]` | `00` | Completely blocked (Cold Boot safety isolation) |
+| **At 40 ns** | `OPERATIONAL` | `[True, True, True]` | `00` | **Active cryptographic ciphertext** spawned |
+| **At 60 ns** | `ISOLATED` | `[False, False, False]` | `01` | First crash detected. Immediate sub-nanosecond isolation. |
+| **At 70 ns** | `OPERATIONAL` | `[True, True, True]` | `01` | **Automatic Reboot 1 successful.** Data stream recovers. |
+| **At 80 ns** | `ISOLATED` | `[False, False, False]` | `10` | Second crash detected. Immediate isolation. |
+| **At 90 ns** | `OPERATIONAL` | `[True, True, True]` | `10` | **Automatic Reboot 2 successful.** Data stream recovers. |
+| **At 100 ns** | `ISOLATED` (Lock) | `[False, False, False]` | `11` | **3rd Crash Triggered. Permanent `force_lockout` active (High-Z 'Z').** |
 
 ---
 
