@@ -52,6 +52,11 @@ The complete end-to-end hardware pipeline (Transmitter, SHA3 Noise Blender, Egre
 
 ---
 
+## Repository Structure & Source Code
+The open-source HDL files for the functional baseline of this protocol are available in the root directory:
+* `trident_core_base.vhd` — The primary structural hardware architecture (Transmitter & Reversal Decryption Core).
+* `tb_trident_core_integrated.vhd` — The RTL stress test bench architecture for Questa validation.
+
 ## Licensing & Intellectual Property
 
 All intellectual property rights, mathematical matrices, and hardware architecture designs regarding Project Trident are officially registered and timestamped under Benelux **i-DEPOT number 158618**.
